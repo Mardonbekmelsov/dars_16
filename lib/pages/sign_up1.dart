@@ -1,3 +1,4 @@
+import 'package:dars_16/pages/last_page.dart';
 import 'package:dars_16/pages/log_in.dart';
 import 'package:dars_16/pages/sign_up2.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,12 @@ class _SignUp1State extends State<SignUp1> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController verifyController = TextEditingController();
+
+  String? errorEmail;
+  String? errorPassword1;
+  String? errorPassword2;
+  String? errorName;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,12 +44,119 @@ class _SignUp1State extends State<SignUp1> {
                   //create account button
                   InkWell(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SignUp2(),
-                        ),
-                      );
+                      String email = emailController.text.trim();
+                      String password = passwordController.text.trim();
+                      String password2 = verifyController.text.trim();
+                      String name = nameController.text.trim();
+
+                      if (password.isEmpty) {
+                        errorPassword1 = "Can not be empty password";
+                      }
+                      if (password2.isEmpty) {
+                        errorPassword2 = "Can not be empty password";
+                      }
+                      if (name.isEmpty) {
+                        errorEmail = "Can not be empty email";
+                      }
+                      if (name.isEmpty) {
+                        errorName = "Can not be empty name";
+                      }
+
+                      setState(() {});
+
+                      if (!email.contains("@") || email.length < 8) {
+                        errorEmail = "email must contain @";
+                      } else if (password.length < 8) {
+                        errorPassword1 =
+                            "password should contain 8 atleast letters";
+                      } else if (password2.length < 8) {
+                        errorPassword2 =
+                            "password hsoul contain 8 atleast letters";
+                      } else if (password != password2) {
+                        errorPassword2 = "password doesn't match";
+                        errorPassword1 = "password doesn't match";
+                        setState(() {});
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor: Colors.grey.shade200,
+                            content: Column(
+                              children: [
+                                const SizedBox(
+                                  height: 40,
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(color: Colors.grey)),
+                                  child: const Icon(
+                                    Icons.check,
+                                    color: Colors.blue,
+                                    size: 100,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                const Text(
+                                  "Your account has active",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24,
+                                  ),
+                                ),
+                                const Text(
+                                  "Congatulations you are success to change your profile",
+                                  style: TextStyle(
+                                      color: Colors.grey,
+                                      fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.center,
+                                ),
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => LastPage(),
+                                      ),
+                                    );
+                                    ScaffoldMessenger.of(context)
+                                        .clearSnackBars();
+                                  },
+                                  child: Container(
+                                    width: double.infinity,
+                                    padding: const EdgeInsets.all(16),
+                                    decoration: BoxDecoration(
+                                        color: Colors.blue,
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: const Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "Ok",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }
+
                     },
                     child: Container(
                       width: double.infinity,
@@ -163,6 +277,7 @@ class _SignUp1State extends State<SignUp1> {
                 TextField(
                   controller: nameController,
                   decoration: InputDecoration(
+                    errorText: errorName,
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.grey.shade400,
@@ -184,6 +299,7 @@ class _SignUp1State extends State<SignUp1> {
                 TextField(
                   controller: emailController,
                   decoration: InputDecoration(
+                    errorText: errorEmail,
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.grey.shade400,
@@ -205,6 +321,7 @@ class _SignUp1State extends State<SignUp1> {
                   controller: passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
+                    errorText: errorPassword1,
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.grey.shade400,
@@ -226,6 +343,7 @@ class _SignUp1State extends State<SignUp1> {
                   controller: verifyController,
                   obscureText: true,
                   decoration: InputDecoration(
+                    errorText: errorPassword2,
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.grey.shade400,

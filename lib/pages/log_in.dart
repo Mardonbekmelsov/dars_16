@@ -1,5 +1,6 @@
 import 'package:dars_16/pages/last_page.dart';
 import 'package:dars_16/pages/sign_up1.dart';
+import 'package:dars_16/utils/accounts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -11,6 +12,10 @@ class LogIn extends StatefulWidget {
 class _LogInState extends State<LogIn> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  String? errorEmail;
+  String? errorPassword;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,6 +40,22 @@ class _LogInState extends State<LogIn> {
                   //create account button
                   InkWell(
                     onTap: () {
+                      String email = emailController.text.trim();
+                      String password = passwordController.text.trim();
+
+                      accounts.forEach((element) {
+                        if (element['email'] == email &&
+                            element['password'] == password) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LastPage()));
+                        }
+                      });
+                      errorEmail = "Incorrect email or password";
+                      errorPassword = "Incorrect email or password";
+                      setState(() {});
+
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => LastPage()));
                     },
@@ -209,8 +230,10 @@ class _LogInState extends State<LogIn> {
                   height: 10,
                 ),
                 TextField(
+                  keyboardType: TextInputType.emailAddress,
                   controller: emailController,
                   decoration: InputDecoration(
+                    errorText: errorEmail,
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.grey.shade400,
@@ -229,9 +252,11 @@ class _LogInState extends State<LogIn> {
                   height: 15,
                 ),
                 TextField(
+                  keyboardType: TextInputType.name,
                   controller: passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
+                    errorText: errorPassword,
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.grey.shade400,

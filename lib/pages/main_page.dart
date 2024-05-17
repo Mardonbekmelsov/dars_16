@@ -6,12 +6,12 @@ class FirstPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration(seconds: 3), () {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => SeaconPage()));
+    });
     return Scaffold(
         body: InkWell(
-      onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SeaconPage()));
-      },
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -43,23 +43,23 @@ class _SignUp3State extends State<SignUp3> {
                           backgroundColor: Colors.grey.shade200,
                           content: Column(
                             children: [
-                              SizedBox(
+                              const SizedBox(
                                 height: 40,
                               ),
                               Container(
                                 decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     border: Border.all(color: Colors.grey)),
-                                child: Icon(
+                                child: const Icon(
                                   Icons.check,
                                   color: Colors.blue,
                                   size: 100,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
-                              Text(
+                              const Text(
                                 "Your account has active",
                                 style: TextStyle(
                                   color: Colors.black,
@@ -67,14 +67,14 @@ class _SignUp3State extends State<SignUp3> {
                                   fontSize: 24,
                                 ),
                               ),
-                              Text(
+                              const Text(
                                 "Congatulations you are success to change your profile",
                                 style: TextStyle(
                                     color: Colors.grey,
                                     fontWeight: FontWeight.bold),
                                 textAlign: TextAlign.center,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 15,
                               ),
                               InkWell(
@@ -107,7 +107,7 @@ class _SignUp3State extends State<SignUp3> {
                                   ),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 15,
                               ),
                             ],
@@ -195,20 +195,20 @@ class _SignUp3State extends State<SignUp3> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
                 InkWell(
                   child: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: Colors.grey, shape: BoxShape.circle),
-                    child: Icon(
+                    child: const Icon(
                       Icons.keyboard_arrow_left,
                       size: 30,
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 const Text(
@@ -235,16 +235,16 @@ class _SignUp3State extends State<SignUp3> {
                   filled: true,
                   fillColor: Colors.black.withOpacity(0.1),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 Row(
                   children: [
-                    Icon(
+                    const Icon(
                       CupertinoIcons.exclamationmark_circle,
                       color: Colors.grey,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Text(
